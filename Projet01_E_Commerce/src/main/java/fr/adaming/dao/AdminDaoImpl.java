@@ -1,39 +1,44 @@
 package fr.adaming.dao;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import fr.adaming.model.Admin;
 
+@Repository
 public class AdminDaoImpl implements IAdminDao{
 
+	// Create Session Factory
+	@Autowired
+	private SessionFactory sf;
 	
-		// This annotation allows to inject an EntityManager instantiated by EJB Container
-		@PersistenceContext(unitName="PU_I_Commerce")
-		private EntityManager em;
+	// Setter for Dependancy Injection
+	public void setSf(SessionFactory sf) {
+		this.sf = sf;
+	}
+	
+	@Override
+	public Admin isExist(Admin ad) {
+		// Get Hibernate's session
+		Session s = sf.getCurrentSession();
 		
-		@Override
-		public Admin isExist(Admin ad) {
-			
-			// JPQL Request
-			String  req="SELECT ad FROM Admin as ad WHERE ad.mail=:pMail AND ad.pw=:pPw";
-			
-			// Récupérer un objet de type Query
-			Query query = em.createQuery(req);
-			
-			// Passage des paramètres
-			query.setParameter("pMail", ad.getMail());
-			query.setParameter("pPw", ad.getPw());
-			
-			try {
-			
-				return (Admin)query.getSingleResult();
-			
-			} catch (Exception ex){
-				ex.printStackTrace();
-			}
-			return null;
-		}
+		// HQL Request
+		String req = "FROM Admin AS a WHERE a.mail=:pMail AND a.pw=:pPw";
+		
+		// Get Query Object
+		Query query = s.createQuery(req);
+		
+		// Parameters
+		query.setParameter("pMail", ad.getMail());
+		query.setParameter("pPw", ad.getPw());
+		
+		return (Admin) query.uniqueResult();
+	}
+
+	
+
 
 }

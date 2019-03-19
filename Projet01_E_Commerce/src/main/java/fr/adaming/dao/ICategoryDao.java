@@ -1,12 +1,9 @@
-package fr.adaming.Dao;
+package fr.adaming.dao;
 
 import java.util.List;
 
-import javax.ejb.Local;
-
 import fr.adaming.model.Category;
 
-@Local
 public interface ICategoryDao {
 	
 	public Category createCategory(Category c);
