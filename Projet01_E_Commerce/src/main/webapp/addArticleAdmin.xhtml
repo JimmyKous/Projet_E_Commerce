@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<title>Add Article</title>
+</h:head>
+<h:body>
+	<ui:insert>
+		<ui:include src="/templates/template_menubaradmin.xhtml"></ui:include>
+	</ui:insert>
+	<h1 style="color: gray; text-align: center;">New Article</h1>
+	<h:form enctype="multipart/form-data">
+		<h:panelGrid columns="2">
+			Designation:<h:inputText value="#{artMB.article.designation}" />
+			Description: <h:inputText value="#{artMB.article.description}" />
+			Price: <h:inputText value="#{artMB.article.price}" />
+			Stock: <h:inputText value="#{artMB.article.stock}" />
+			Image: <p:fileUpload value="#{artMB.image}" mode="simple" skinSimple="true" />
+			<h:commandButton value="Add" action="#{artMB.addArticle}" />
+		</h:panelGrid>
+	</h:form>
+	
+</h:body>
+</html>
