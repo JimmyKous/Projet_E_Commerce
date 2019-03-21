@@ -13,29 +13,29 @@ import fr.adaming.model.Admin;
 import fr.adaming.service.IAdminService;
 
 @SuppressWarnings("serial")
-@ManagedBean(name="adMB")
+@ManagedBean(name = "adMB")
 @RequestScoped
 public class AdminManagedBean implements Serializable {
 
-	// Transform UML to Java Association
-	@ManagedProperty(value="#{adService}")
-	private IAdminService adService;
-	
 	// Attributes
 	private Admin admin;
 	private HttpSession maSession;
-	
+
+	// Transform UML to Java Association
+	@ManagedProperty(value = "#{adService}")
+	private IAdminService adService;
+
 	// Constructor
 	public AdminManagedBean() {
 		this.admin = new Admin();
 	}
 
-	// Setter for Dependancy Injection 
+	// Setter for Dependance Injection
 	public void setAdService(IAdminService adService) {
 		this.adService = adService;
-		this. maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 	}
-	
+
 	public Admin getAdmin() {
 		return admin;
 	}
@@ -46,22 +46,22 @@ public class AdminManagedBean implements Serializable {
 
 	// Work Methods
 	public String logAdmin() {
-		
+
 		// Get Formateur with Mail and Pass
 		Admin adOut = adService.isExist(admin);
-		
-		if (adOut!=null){
-			
+
+		if (adOut != null) {
+
 			// Save Admin in session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adSession", adOut);
 			return "admin";
-			
+
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Adresse Mail et/ou Mot de Passe erroné(s)"));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Adresse Mail et/ou Mot de Passe erroné(s)"));
 			return "login";
 		}
-		
+
 	}
-	
-	
+
 }
