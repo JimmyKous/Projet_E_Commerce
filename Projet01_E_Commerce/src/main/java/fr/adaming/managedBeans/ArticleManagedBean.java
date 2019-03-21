@@ -1,6 +1,7 @@
 package fr.adaming.managedBeans;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -15,8 +16,8 @@ import fr.adaming.service.IArticleService;
 public class ArticleManagedBean {
 
 	// Transform UML to Java Association
-	
-	IArticleService artService;
+	@ManagedProperty(value="artService")
+	private IArticleService artService;
 
 	// attributes
 
