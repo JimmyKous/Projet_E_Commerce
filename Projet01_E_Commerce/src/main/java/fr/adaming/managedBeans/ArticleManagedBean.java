@@ -1,7 +1,8 @@
 package fr.adaming.managedBeans;
 
-import java.io.Serializable;
+import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -13,13 +14,12 @@ import org.primefaces.model.UploadedFile;
 import fr.adaming.model.Article;
 import fr.adaming.service.IArticleService;
 
-@SuppressWarnings("serial")
 @ManagedBean(name="artMB")
 @RequestScoped
-public class ArticleManagedBean implements Serializable{
+public class ArticleManagedBean {
 
 	// Transform UML to Java Association
-	@ManagedProperty(value="artService")
+	@ManagedProperty(value="#{artService}")
 	private IArticleService artService;
 
 	// attributes
@@ -72,10 +72,15 @@ public class ArticleManagedBean implements Serializable{
 			this.article.setPicture(this.image.getContents());
 		}
 		Article a = artService.createArticle(article);
-		
+		if (a!=null) {
+			List<Article> listArt = artService.getAllArticle();
+			mySession.setAttribute("listArt", listArt);
 			return "viewAllArticles";
-
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Add Article Failed"));
+			return "addArticle";
 		}
 	}
+}
 
 

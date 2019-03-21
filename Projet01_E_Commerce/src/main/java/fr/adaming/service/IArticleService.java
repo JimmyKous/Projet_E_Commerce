@@ -1,6 +1,9 @@
 package fr.adaming.service;
 
+import java.util.List;
+
 import fr.adaming.model.Article;
+import fr.adaming.model.Category;
 
 
 public interface IArticleService {
@@ -13,4 +16,7 @@ public interface IArticleService {
 	
 	public int deleteArticle(Article a);
 	
+	public List<Article> getAllArticle();
+	
+	public List<Article> getAllArticleFromCategoty(Category c);
 }
