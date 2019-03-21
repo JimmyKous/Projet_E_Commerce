@@ -29,15 +29,13 @@ public class CategoryDaoImpl implements ICategoryDao {
 
 	@Override
 	public Category getCategory(Category c) {
-		// TODO Auto-generated method stub
-		return null;
+		Session s = sf.getCurrentSession();
+		return (Category) s.get(Category.class, c.getIdCat());
 	}
 
 	@Override
 	public int updateCategory(Category c) {
 		Session s = sf.getCurrentSession();
-		Category cOut = (Category) s.get(Category.class, c.getIdCat());
-		c.setIdCat(cOut.getIdCat());
 		try {
 			s.merge(c);
 			return 1;

@@ -23,6 +23,7 @@ public class CustomerDaoImpl implements ICustomerDao {
 	@Override
 	public Customer addCustomer(Customer c) {
 		Session s = sf.getCurrentSession();
+		s.save(c);
 		return (Customer) s.get(Customer.class,c.getId());
 	}
 

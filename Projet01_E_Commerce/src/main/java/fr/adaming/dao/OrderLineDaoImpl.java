@@ -2,96 +2,64 @@ package fr.adaming.dao;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import fr.adaming.model.OrderLine;
 
+@Repository
 public class OrderLineDaoImpl implements IOrderLineDao {
 
-	// This annotation allows to inject an EntityManager instantiated by EJB Container
-	@PersistenceContext(unitName="PU_I_Commerce")
-	private EntityManager em;
+	@Autowired
+	private SessionFactory sf;
 	
-	@Override
-	public OrderLine addOrderLine(OrderLine ol) {
-		em.persist(ol);
-		return ol;
+	
+	public void setSf(SessionFactory sf) {
+		this.sf = sf;
 	}
 
 	@Override
+	public OrderLine addOrderLine(OrderLine ol) {
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<OrderLine> getAllOrderLine() {
-		// JPQL Request
-		String req = "SELECT ol FROM OrderLine AS ol";
-		
-		// Instantiate Query Object
-		Query query = em.createQuery(req);
-		
-		try{
-			@SuppressWarnings("unchecked")
-			List<OrderLine> orderLines = query.getResultList();
-			return orderLines ;
-		} catch (Exception ex){
-			ex.printStackTrace();
-		}
-		return null;
+		Session s = sf.getCurrentSession();
+		String req = "FROM OrderLine";
+		Query query = s.createQuery(req);
+		return query.list();
 	}
 
 	@Override
 	public OrderLine getOrderLine(OrderLine ol) {
-		
-		try {
-			
-			return em.find(OrderLine.class, ol);
-		
-		} catch (Exception ex){
-			ex.printStackTrace();
-		}
-		return null;
+		Session s = sf.getCurrentSession();
+		return (OrderLine) s.get(OrderLine.class, ol.getIdOL());
 	}
 
 	@Override
 	public int DeleteOrderLine(OrderLine ol) {
-		// JPQL Request
-		String req = "DELETE OrderLine AS ol WHERE ol.idOL=:pIdOL";
-		
-		// Instantiate Query Object
-		Query query = em.createQuery(req);
-		
-		// Parameters
+		Session s = sf.getCurrentSession();
+		String req = "DELETE FROM OrderLine AS ol WHERE ol.idOL=:pIdOL";
+		Query query = s.createQuery(req);
 		query.setParameter("pIdOL", ol.getIdOL());
-		
-		try {
-			
-			return query.executeUpdate();
-		
-		} catch (Exception ex){
-			ex.printStackTrace();
-		}
-		return 0;
+		return query.executeUpdate();
 	}
-
 
 	@Override
 	public int UpdateOrderLine(OrderLine ol) {
-		// JPQL Request
-		String req = "UPDATE OrderLine AS ol SET ol.quantity=:pQuantity, ol.price=:pPrice WHERE ol.idOL=:pIdOL";
-		
-		// Instantiate Query Object
-		Query query = em.createQuery(req);
-		
-		// Parameters
-		query.setParameter("pIdOL", ol.getIdOL());
-		
+		Session s = sf.getCurrentSession();
 		try {
-			
-			return query.executeUpdate();
-		
-		} catch (Exception ex){
-			ex.printStackTrace();
+			s.merge(ol);
+			return 1;
+		} catch (Exception e1) {
+			return 0;
 		}
-		return 0;
 	}
+
 
 }
