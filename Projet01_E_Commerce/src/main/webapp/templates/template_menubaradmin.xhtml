@@ -9,23 +9,25 @@
 </head>
 <body>
 	<ui:composition>
-		<p:menubar style="margin-top:20px">
-			<p:submenu label="Gestion des Articles">
-				<p:menuitem value="Ajouter" url="addArticleAdmin.xhtml" />
-				<p:menuitem value="Modifier" url="updateArticleAdmin.xhtml" />
-				<p:menuitem value="Supprimer" url="deleteArticleAdmin.xhtml" />
-			</p:submenu>
-			<p:submenu label="Gestion des Catégories">
-				<p:menuitem value="Afficher" url="viewAllCategory.xhtml" />
-				<p:menuitem value="Ajouter" url="addCategory.xhtml" />
-				<p:menuitem value="Modifier" url="updateCategory.xhtml" />
-				<p:menuitem value="Supprimer" url="deleteCategory.xhtml" />
-			</p:submenu>
-			<f:facet name="options">
-				<p:inputText placeholder="Rechercher" />
-			</f:facet>
-			<p:menuitem value="Se déconnecter" url="homePage.xhtml" />
-		</p:menubar>
+		<h:form>
+			<p:menubar style="margin-top:20px">
+				<p:submenu label="Gestion des Articles">
+					<p:menuitem value="Ajouter" url="addArticleAdmin.xhtml" />
+					<p:menuitem value="Modifier" url="updateArticleAdmin.xhtml" />
+					<p:menuitem value="Supprimer" url="deleteArticleAdmin.xhtml" />
+				</p:submenu>
+				<p:submenu label="Gestion des Catégories">
+					<p:menuitem value="Afficher" url="viewAllCategory.xhtml" />
+					<p:menuitem value="Ajouter" url="addCategory.xhtml" />
+					<p:menuitem value="Modifier" url="updateCategory.xhtml" />
+					<p:menuitem value="Supprimer" url="deleteCategory.xhtml" />
+				</p:submenu>
+				<f:facet name="options">
+					<p:inputText placeholder="Rechercher" />
+				</f:facet>
+				<p:menuitem value="Se déconnecter" url="homePage.xhtml" />
+			</p:menubar>
+		</h:form>
 	</ui:composition>
 </body>
 </html>

@@ -5,7 +5,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-<title>Insert title here</title>
+<title>View All Categories</title>
 </h:head>
 <h:body>
 	<ui:insert>
@@ -15,12 +15,13 @@
 	<h1 style="Color: gray; text-align: center;">Customer's List</h1>	
 	<h:form>
 
-		<p:dataTable var="c" value="#{sessionScope.catList}" id="idTable">
+		<p:dataTable var="c" value="#{sessionScope.listCat}" id="idTable">
 		    <p:column headerText="Id">
 		        <h:outputText value="#{c.idCat}" />
 		    </p:column>
-		    
-		    <h:graphicImage value="#{c.img}"/>
+		    <p:column headerText="Picture">
+		        <h:graphicImage value="#{c.img}"/>
+		    </p:column>
 		 
 		    <p:column headerText="Name">
 		        <h:outputText value="#{c.categoryName}" />
@@ -40,7 +41,9 @@
 		    	</p:commandLink>
 		    </p:column>
 		</p:dataTable>
+		<h3 style="color:red;"><h:messages/></h3>
 	</h:form>
-	<h3 style="color:red;"><h:messages/></h3>
+	
+	
 </h:body>
 </html>

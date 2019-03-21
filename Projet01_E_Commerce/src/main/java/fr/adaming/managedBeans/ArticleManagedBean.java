@@ -75,10 +75,10 @@ public class ArticleManagedBean {
 		if (a!=null) {
 			List<Article> listArt = artService.getAllArticle();
 			mySession.setAttribute("listArt", listArt);
-			return "viewAllArticles";
+			return "admin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Add Article Failed"));
-			return "addArticle";
+			return "addArticleAdmin";
 		}
 	}
 }

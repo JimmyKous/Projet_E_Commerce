@@ -30,8 +30,8 @@ public class Category {
 	@Column(name="description_cat")
 	private String description;
 	
-	@Column(name="picture_cat")
 	@Lob
+	@Column(name="picture_cat")
 	private byte[] picture;
 	
 	@Transient

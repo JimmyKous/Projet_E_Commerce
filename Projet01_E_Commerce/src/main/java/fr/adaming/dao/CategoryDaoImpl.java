@@ -2,6 +2,7 @@ package fr.adaming.dao;
 
 import java.util.List;
 
+import org.apache.commons.codec.binary.Base64;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -60,7 +61,11 @@ public class CategoryDaoImpl implements ICategoryDao {
 		Session s = sf.getCurrentSession();
 		String req = "FROM Category";
 		Query query = s.createQuery(req);
-		return query.list();
+		List<Category> listCat = query.list();
+		for (Category ca : listCat) {
+			ca.setImg("data:image/png;base64," + Base64.encodeBase64String(ca.getPicture()));
+		}
+		return listCat;
 	}
 
 

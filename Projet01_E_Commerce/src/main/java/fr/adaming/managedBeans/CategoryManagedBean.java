@@ -2,6 +2,7 @@ package fr.adaming.managedBeans;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -35,6 +36,12 @@ public class CategoryManagedBean {
 		this.category = new Category();
 		this.mySession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		this.image = null;
+	}
+	
+	@PostConstruct
+	public void init() {
+	List<Category> listCat = catService.getAllCategory();
+	mySession.setAttribute("listCat", listCat);
 	}
 
 	// Setter for Dependency Injection
