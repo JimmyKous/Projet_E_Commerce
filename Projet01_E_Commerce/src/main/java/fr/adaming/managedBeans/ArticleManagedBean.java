@@ -1,5 +1,7 @@
 package fr.adaming.managedBeans;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -11,9 +13,10 @@ import org.primefaces.model.UploadedFile;
 import fr.adaming.model.Article;
 import fr.adaming.service.IArticleService;
 
+@SuppressWarnings("serial")
 @ManagedBean(name="artMB")
 @RequestScoped
-public class ArticleManagedBean {
+public class ArticleManagedBean implements Serializable{
 
 	// Transform UML to Java Association
 	@ManagedProperty(value="artService")

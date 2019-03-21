@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import fr.adaming.dao.IArticleDao;
 import fr.adaming.model.Article;
 
-@Service("articleService")
+@Service("artService")
 @Transactional
 public class ArticleServiceImpl implements IArticleService {
 	
