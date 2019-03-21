@@ -2,11 +2,8 @@ package fr.adaming.service;
 
 import java.util.List;
 
-import javax.ejb.Local;
-
 import fr.adaming.model.Order;
 
-@Local
 public interface IOrderService {
 
 	public Order addOrder(Order o);

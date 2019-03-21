@@ -1,10 +1,7 @@
 package fr.adaming.service;
 
-import javax.ejb.Local;
-
 import fr.adaming.model.Customer;
 
-@Local
 public interface ICustomerService {
 	
 	public Customer addCustomer(Customer c);
