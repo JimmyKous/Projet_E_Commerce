@@ -22,16 +22,9 @@ public class AdminDaoImpl implements IAdminDao{
 	
 	@Override
 	public Admin isExist(Admin ad) {
-		// Get Hibernate's session
 		Session s = sf.getCurrentSession();
-		
-		// HQL Request
 		String req = "FROM Admin AS a WHERE a.mail=:pMail AND a.pw=:pPw";
-		
-		// Get Query Object
 		Query query = s.createQuery(req);
-		
-		// Parameters
 		query.setParameter("pMail", ad.getMail());
 		query.setParameter("pPw", ad.getPw());
 		
