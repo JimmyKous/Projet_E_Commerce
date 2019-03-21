@@ -1,32 +1,41 @@
 package fr.adaming.managedBeans;
 
-import javax.ejb.EJB;
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
-import fr.adaming.Service.IAdminService;
-import fr.adaming.Service.IArticleService;
-import fr.adaming.Service.ICategoryService;
 import fr.adaming.model.Admin;
+import fr.adaming.service.IAdminService;
 
+@SuppressWarnings("serial")
 @ManagedBean(name="adMB")
-@SessionScoped
-public class AdminManagedBean {
+@RequestScoped
+public class AdminManagedBean implements Serializable {
 
 	// Transform UML to Java Association
-	@EJB
+	@ManagedProperty(value="#{adService}")
 	private IAdminService adService;
 	
 	// Attributes
 	private Admin admin;
+	private HttpSession maSession;
 	
 	// Constructor
 	public AdminManagedBean() {
 		this.admin = new Admin();
 	}
 
+	// Setter for Dependancy Injection 
+	public void setAdService(IAdminService adService) {
+		this.adService = adService;
+		this. maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+	}
+	
 	public Admin getAdmin() {
 		return admin;
 	}
@@ -45,13 +54,10 @@ public class AdminManagedBean {
 			
 			// Save Admin in session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adSession", adOut);
-			
 			return "admin";
 			
 		} else {
-			
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Adresse Mail et/ou Mot de Passe erroné(s)"));
-			
 			return "login";
 		}
 		

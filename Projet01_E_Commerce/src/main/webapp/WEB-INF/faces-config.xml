@@ -4,5 +4,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
     version="2.2">
-
+    
+    <!-- Ségrégation EL JSF et EL Spring -->
+	<!-- On force Spring IoC à ne pas confondre l'EL JSF et l'EL Spring -->
+	<application>
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+	</application>
 </faces-config>

@@ -1,0 +1,31 @@
+body {
+	background-image: url("../resources/Images/barrel2.jpg");
+	background-size: 100%;
+	background-repeat: no-repeat;
+	z-index: auto;
+}
+.container{
+	margin : auto;
+	margin-top: 180px;
+	background-color: rgba(128, 128, 128, 0.7);	
+	max-width: 430px;
+	height:310px;
+	border-radius: 25px;
+}
+.login {
+	font-family: fantasy;
+	font-size:20pt;
+	text-align: center;
+	padding-top: 10px;
+	z-index: 2;
+}
+.inputText {
+	font-family: fantasy;
+	text-align: center;
+	width: 330px;
+	padding-bottom: 5px;
+}
+.btn{
+	max-width: 100px;
+	margin: 0px;	
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+<title>Insert title here</title>
+</head>
+<body>
+	<ui:composition>
+		<p:menubar style="margin-top:20px">
+			<p:submenu label="Gestion des Articles">
+				<p:menuitem value="Ajouter" url="addArticleAdmin.xhtml" />
+				<p:menuitem value="Modifier" url="updateArticleAdmin.xhtml" />
+				<p:menuitem value="Supprimer" url="deleteArticleAdmin.xhtml" />
+			</p:submenu>
+			<p:submenu label="Gestion des Catégories">
+				<p:menuitem value="Afficher" url="viewAllCategory.xhtml" />
+				<p:menuitem value="Ajouter" url="addCategory.xhtml" />
+				<p:menuitem value="Modifier" url="updateCategory.xhtml" />
+				<p:menuitem value="Supprimer" url="deleteCategory.xhtml" />
+			</p:submenu>
+			<f:facet name="options">
+				<p:inputText placeholder="Rechercher" />
+			</f:facet>
+			<p:menuitem value="Se déconnecter" url="homePage.xhtml" />
+		</p:menubar>
+	</ui:composition>
+</body>
+</html>
