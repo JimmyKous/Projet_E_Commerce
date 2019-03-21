@@ -1,14 +1,24 @@
 package fr.adaming.service;
 
-import fr.adaming.dao.ArticleDaoImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import fr.adaming.dao.IArticleDao;
 import fr.adaming.model.Article;
 
-
+@Service("articleService")
+@Transactional
 public class ArticleServiceImpl implements IArticleService {
 	
 	// Transform UML to Java Association
-	IArticleDao artDao = new ArticleDaoImpl();
+	@Autowired
+	private IArticleDao artDao;
+	
+	//setter for injection of dependance
+	public void setArtDao(IArticleDao artDao) {
+		this.artDao = artDao;
+	}
 	
 	@Override
 	public Article createArticle(Article a) {

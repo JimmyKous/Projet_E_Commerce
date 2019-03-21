@@ -2,17 +2,26 @@ package fr.adaming.service;
 
 import java.util.List;
 
-import fr.adaming.dao.CategoryDaoImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import fr.adaming.dao.ICategoryDao;
 import fr.adaming.model.Category;
 
-
+@Service("catService")
+@Transactional
 public class CategoryServiceImpl implements ICategoryService {
 
 	// Transform UML to Java Association
-	
-	ICategoryDao catDao = new CategoryDaoImpl();
-		
+	@Autowired
+	private ICategoryDao catDao;
+
+	// setter for injection of dependance
+	public void setCatDao(ICategoryDao catDao) {
+		this.catDao = catDao;
+	}
+
 	@Override
 	public Category createCategory(Category c) {
 		return catDao.createCategory(c);
@@ -38,5 +47,4 @@ public class CategoryServiceImpl implements ICategoryService {
 		return catDao.getAllCategory();
 	}
 
-	
 }

@@ -2,19 +2,25 @@ package fr.adaming.service;
 
 import java.util.List;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateful;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import fr.adaming.Dao.IOrderLineDao;
-import fr.adaming.Dao.OrderLineDaoImpl;
+import fr.adaming.dao.IOrderLineDao;
 import fr.adaming.model.OrderLine;
 
-@Stateful
+@Service("olService")
+@Transactional
 public class OrderLineServiceImpl implements IOrderLineService {
 
-	@EJB 
-	IOrderLineDao olDao	= new OrderLineDaoImpl();
+	@Autowired
+	private IOrderLineDao olDao;
 	
+	//setter for injection of dependance
+	public void setOlDao(IOrderLineDao olDao) {
+		this.olDao = olDao;
+	}
+
 	@Override
 	public OrderLine addOrderLine(OrderLine ol) {
 		return olDao.addOrderLine(ol);

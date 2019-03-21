@@ -5,16 +5,26 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import fr.adaming.dao.IOrderDao;
 import fr.adaming.dao.OrderDaoImpl;
 import fr.adaming.model.Order;
 
-@Stateful
+@Service("oService")
+@Transactional
 public class OrderServiceImpl implements IOrderService {
 
-	@EJB
-	private IOrderDao oDao = new OrderDaoImpl();
+	@Autowired
+	private IOrderDao oDao;
 	
+	//setter for injection of dependance
+	public void setoDao(IOrderDao oDao) {
+		this.oDao = oDao;
+	}
+
 	@Override
 	public Order addOrder(Order o) {
 		return oDao.addOrder(o);
@@ -29,6 +39,5 @@ public class OrderServiceImpl implements IOrderService {
 	public List<Order> getAllOrder() {
 		return oDao.getAllOrder();
 	}
-	
 
 }

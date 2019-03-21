@@ -1,15 +1,24 @@
 package fr.adaming.service;
 
-import fr.adaming.dao.CustomerDaoImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import fr.adaming.dao.ICustomerDao;
 import fr.adaming.model.Customer;
 
-
+@Service("cService")
+@Transactional
 public class CustomerServiceImpl implements ICustomerService {
-	
-	// Transform UML to Java Association
 
-	private ICustomerDao cDao = new CustomerDaoImpl();
+	// Transform UML to Java Association
+	@Autowired
+	private ICustomerDao cDao;
+
+	// setter for injection of dependance
+	public void setcDao(ICustomerDao cDao) {
+		this.cDao = cDao;
+	}
 
 	@Override
 	public Customer addCustomer(Customer c) {
