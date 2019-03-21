@@ -23,7 +23,9 @@ public class OrderLineDaoImpl implements IOrderLineDao {
 
 	@Override
 	public OrderLine addOrderLine(OrderLine ol) {
-		
+		Session s = sf.getCurrentSession();
+		s.save(ol);
+		return (OrderLine) s.get(OrderLine.class, ol.getIdOL());
 	}
 
 	@SuppressWarnings("unchecked")
