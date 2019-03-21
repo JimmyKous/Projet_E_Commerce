@@ -39,7 +39,7 @@
 
 	<!-- Page d'acceuil -->
 	<welcome-file-list>
-		<welcome-file>login.xhtml</welcome-file>
+		<welcome-file>homePage.xhtml</welcome-file>
 	</welcome-file-list>
 
 
