@@ -1,10 +1,8 @@
-package fr.adaming.Service;
-
-import javax.ejb.Local;
+package fr.adaming.service;
 
 import fr.adaming.model.Article;
 
-@Local
+
 public interface IArticleService {
 
 	public Article createArticle(Article a);

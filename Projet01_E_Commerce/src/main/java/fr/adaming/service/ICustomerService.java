@@ -1,4 +1,4 @@
-package fr.adaming.Service;
+package fr.adaming.service;
 
 import javax.ejb.Local;
 

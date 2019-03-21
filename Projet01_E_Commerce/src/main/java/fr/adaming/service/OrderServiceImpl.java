@@ -1,12 +1,12 @@
-package fr.adaming.Service;
+package fr.adaming.service;
 
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
-import fr.adaming.Dao.IOrderDao;
-import fr.adaming.Dao.OrderDaoImpl;
+import fr.adaming.dao.IOrderDao;
+import fr.adaming.dao.OrderDaoImpl;
 import fr.adaming.model.Order;
 
 @Stateful

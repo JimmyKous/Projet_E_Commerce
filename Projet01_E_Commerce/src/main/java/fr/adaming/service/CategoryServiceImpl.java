@@ -1,19 +1,16 @@
-package fr.adaming.Service;
+package fr.adaming.service;
 
 import java.util.List;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateful;
-
-import fr.adaming.Dao.CategoryDaoImpl;
-import fr.adaming.Dao.ICategoryDao;
+import fr.adaming.dao.CategoryDaoImpl;
+import fr.adaming.dao.ICategoryDao;
 import fr.adaming.model.Category;
 
-@Stateful
+
 public class CategoryServiceImpl implements ICategoryService {
 
 	// Transform UML to Java Association
-	@EJB
+	
 	ICategoryDao catDao = new CategoryDaoImpl();
 		
 	@Override

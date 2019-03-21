@@ -1,17 +1,13 @@
-package fr.adaming.Service;
+package fr.adaming.service;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateful;
-
-import fr.adaming.Dao.AdminDaoImpl;
-import fr.adaming.Dao.IAdminDao;
+import fr.adaming.dao.AdminDaoImpl;
+import fr.adaming.dao.IAdminDao;
 import fr.adaming.model.Admin;
 
-@Stateful
+
 public class AdminServiceImpl implements IAdminService {
 
 	// Transform UML to Java Association
-	@EJB
 	private IAdminDao adDao = new AdminDaoImpl();
 
 	@Override

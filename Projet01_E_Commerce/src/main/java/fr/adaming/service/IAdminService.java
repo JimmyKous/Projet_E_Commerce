@@ -1,10 +1,8 @@
-package fr.adaming.Service;
-
-import javax.ejb.Local;
+package fr.adaming.service;
 
 import fr.adaming.model.Admin;
 
-@Local
+
 public interface IAdminService {
 	
 	public Admin isExist(Admin ad);
