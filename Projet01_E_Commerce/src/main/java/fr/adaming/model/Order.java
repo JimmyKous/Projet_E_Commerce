@@ -31,7 +31,7 @@ public class Order {
 	@JoinColumn(name="c_id", referencedColumnName="id_c")
 	private Customer customer;
 
-	@OneToMany(mappedBy="order", cascade={CascadeType.REMOVE, CascadeType.PERSIST}, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="order", cascade={CascadeType.REMOVE, CascadeType.PERSIST})
 	private List<OrderLine> orderLines;
 
 	// Constructor

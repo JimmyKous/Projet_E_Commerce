@@ -34,7 +34,7 @@ public class Customer {
 	private String adress;
 	
 	// Transform UML to Java association
-	@OneToMany(mappedBy="customer", cascade={CascadeType.REMOVE, CascadeType.PERSIST}, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="customer", cascade={CascadeType.REMOVE, CascadeType.PERSIST})
 	private List<Order> orders;
 
 	// Constructors
