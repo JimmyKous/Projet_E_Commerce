@@ -32,7 +32,12 @@ public class ArticleManagedBean {
 		this.mySession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		this.image = null;
 	}
-
+	
+	//setters for dependency's injection
+	public void setArtService(IArticleService artService) {
+		this.artService = artService;
+	}
+	
 	// getters and setters
 	public Article getArticle() {
 		return article;

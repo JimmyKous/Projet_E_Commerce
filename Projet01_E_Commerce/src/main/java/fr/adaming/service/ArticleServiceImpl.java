@@ -15,7 +15,7 @@ public class ArticleServiceImpl implements IArticleService {
 	@Autowired
 	private IArticleDao artDao;
 	
-	//setter for injection of dependance
+	//setter for dependency's injection
 	public void setArtDao(IArticleDao artDao) {
 		this.artDao = artDao;
 	}
