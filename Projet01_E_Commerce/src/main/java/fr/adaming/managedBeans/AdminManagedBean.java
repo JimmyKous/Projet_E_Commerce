@@ -7,10 +7,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 import fr.adaming.model.Admin;
 import fr.adaming.service.IAdminService;
+import fr.adaming.service.IArticleService;
+import fr.adaming.service.ICategoryService;
 
 @SuppressWarnings("serial")
 @ManagedBean(name = "adMB")
@@ -19,12 +20,17 @@ public class AdminManagedBean implements Serializable {
 
 	// Attributes
 	private Admin admin;
-	private HttpSession maSession;
 
 	// Transform UML to Java Association
 	@ManagedProperty(value = "#{adService}")
 	private IAdminService adService;
-
+	
+	@ManagedProperty(value = "#{catService}")
+	private ICategoryService catService;
+	
+	@ManagedProperty(value = "#{artService}")
+	private IArticleService artService;
+	
 	// Constructor
 	public AdminManagedBean() {
 		this.admin = new Admin();
@@ -33,7 +39,14 @@ public class AdminManagedBean implements Serializable {
 	// Setter for Dependance Injection
 	public void setAdService(IAdminService adService) {
 		this.adService = adService;
-		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+	}
+	
+	public void setCatService(ICategoryService catService) {
+		this.catService = catService;
+	}
+
+	public void setArtService(IArticleService artService) {
+		this.artService = artService;
 	}
 
 	public Admin getAdmin() {
@@ -54,6 +67,8 @@ public class AdminManagedBean implements Serializable {
 
 			// Save Admin in session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adSession", adOut);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listCat", catService.getAllCategory());
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listArt", artService.getAllArticle());
 			return "admin";
 
 		} else {
