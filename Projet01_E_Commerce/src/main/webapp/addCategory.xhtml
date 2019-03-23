@@ -12,14 +12,15 @@
 		<ui:include src="/templates/template_menubaradmin.xhtml"></ui:include>
 	</ui:insert>
 	<h1 style="color: gray; text-align: center;">New Category</h1>
-	<h:form enctype="multipart/form-data">
-		<h:panelGrid columns="2">
-			Category Name: <h:inputText value="#{catMB.category.categoryName}" />
-			Description: <h:inputText value="#{catMB.category.description}" />
-			Image: <p:fileUpload value="#{catMB.image}" mode="simple" skinSimple="true" />
-			<h:commandButton value="Add" action="#{catMB.addCategory}" />
-		</h:panelGrid>
-	</h:form>
-	
+	<div>
+		<h:form enctype="multipart/form-data">
+			<h:panelGrid columns="2">
+				Category Name: <h:inputText value="#{catMB.category.categoryName}" />
+				Description: <p:inputTextarea rows="6" cols="33" value="#{catMB.category.description}" autoResize="false"/>
+				Image: <p:fileUpload value="#{catMB.image}" mode="simple" skinSimple="true" />
+				<h:commandButton value="Add" action="#{catMB.addCategory}" />
+			</h:panelGrid>
+		</h:form>
+	</div>
 </h:body>
 </html>

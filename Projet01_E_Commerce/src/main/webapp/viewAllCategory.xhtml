@@ -12,15 +12,17 @@
 		<ui:include src="/templates/template_menubaradmin.xhtml"></ui:include>
 	</ui:insert>
 	
-	<h1 style="Color: gray; text-align: center;">Customer's List</h1>	
+	<h1 style="Color: gray; text-align: center;">Category's List</h1>	
 	<h:form>
 
-		<p:dataTable var="c" value="#{sessionScope.listCat}" id="idTable">
-		    <p:column headerText="Id">
-		        <h:outputText value="#{c.idCat}" />
+		<p:dataTable var="c" value="#{sessionScope.listCat}" id="idTable" style="text-align: center">
+		
+			<p:column headerText="Picture">
+		        <h:graphicImage value="#{c.img}" width="280px"/>
 		    </p:column>
-		    <p:column headerText="Picture">
-		        <h:graphicImage value="#{c.img}"/>
+		    
+		    <p:column headerText="Id">
+		        <h:outputText value="#{c.idCat}" width="50px" />
 		    </p:column>
 		 
 		    <p:column headerText="Name">

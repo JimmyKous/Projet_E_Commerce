@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.adaming.dao.AdminDaoImpl;
 import fr.adaming.dao.IAdminDao;
 import fr.adaming.model.Admin;
 
@@ -20,7 +19,6 @@ public class AdminServiceImpl implements IAdminService {
 	public void setAdDao(IAdminDao adDao) {
 		this.adDao = adDao;
 	}
-	
 
 	@Override
 	public Admin isExist(Admin ad) {

@@ -12,7 +12,9 @@ import javax.servlet.http.HttpSession;
 import org.primefaces.model.UploadedFile;
 
 import fr.adaming.model.Article;
+import fr.adaming.model.Category;
 import fr.adaming.service.IArticleService;
+import fr.adaming.service.ICategoryService;
 
 @ManagedBean(name="artMB")
 @RequestScoped
@@ -21,6 +23,9 @@ public class ArticleManagedBean {
 	// Transform UML to Java Association
 	@ManagedProperty(value="#{artService}")
 	private IArticleService artService;
+	
+	@ManagedProperty(value="#{catService}")
+	private ICategoryService catService;
 
 	// attributes
 
@@ -28,6 +33,7 @@ public class ArticleManagedBean {
 	private HttpSession mySession;
 	// to add a photo in the DB
 	private UploadedFile image;
+	private int categoryName;
 
 	// constructors
 	public ArticleManagedBean() {
@@ -41,6 +47,10 @@ public class ArticleManagedBean {
 		this.artService = artService;
 	}
 	
+	public void setCatService(ICategoryService catService) {
+		this.catService = catService;
+	}
+
 	// getters and setters
 	public Article getArticle() {
 		return article;
@@ -58,6 +68,14 @@ public class ArticleManagedBean {
 		this.mySession = mySession;
 	}
 
+	public int getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(int categoryName) {
+		this.categoryName = categoryName;
+	}
+
 	public UploadedFile getImage() {
 		return image;
 	}
@@ -71,6 +89,9 @@ public class ArticleManagedBean {
 		if(this.image!=null){
 			this.article.setPicture(this.image.getContents());
 		}
+		Category c = new Category();
+		c.setIdCat(categoryName);
+		this.article.setCategory(catService.getCategory(c));
 		Article a = artService.createArticle(article);
 		if (a!=null) {
 			List<Article> listArt = artService.getAllArticle();
