@@ -28,18 +28,19 @@ public class ArticleManagedBean {
 	private ICategoryService catService;
 
 	// attributes
-
 	private Article article;
 	private HttpSession mySession;
 	// to add a photo in the DB
 	private UploadedFile image;
 	private int categoryName;
+	private Boolean indice;
 
 	// constructors
 	public ArticleManagedBean() {
 		this.article = new Article();
 		this.mySession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		this.image = null;
+		this.indice = false;
 	}
 	
 	//setters for dependency's injection
@@ -58,6 +59,14 @@ public class ArticleManagedBean {
 
 	public void setArticle(Article article) {
 		this.article = article;
+	}
+
+	public Boolean getIndice() {
+		return indice;
+	}
+
+	public void setIndice(Boolean indice) {
+		this.indice = indice;
 	}
 
 	public HttpSession getMySession() {
@@ -96,11 +105,79 @@ public class ArticleManagedBean {
 		if (a!=null) {
 			List<Article> listArt = artService.getAllArticle();
 			mySession.setAttribute("listArt", listArt);
-			return "admin";
+			return "viewAllArticle";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Add Article Failed"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Article Creation failed"));
 			return "addArticleAdmin";
 		}
+	}
+	
+	public String updateArticle() {
+		if(this.image!=null){
+			this.article.setPicture(this.image.getContents());
+		}
+		Category c = new Category();
+		c.setIdCat(categoryName);
+		this.article.setCategory(catService.getCategory(c));
+		int test = artService.updateArticle(article);
+		if (test !=0) {
+			this.mySession.setAttribute("listArt",artService.getAllArticle());
+			return "viewAllArticle";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Article Update failed"));
+			return "updateArticle";
+		}
+	}
+	
+	public String deleteArticle() {
+		// Appel de la méthode Service
+		int test = artService.deleteArticle(article);
+		if (test !=0) {
+			this.mySession.setAttribute("listArt",artService.getAllArticle());
+			return "viewAllArticle";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Article suppression failed"));
+			return "deleteArticle";
+		}
+	}
+	
+	public String searchArticle() {
+		this.indice = true;
+		List<Article> listArt = artService.getAllArticle();
+		mySession.setAttribute("listArt", listArt);
+		this.article = artService.getArticle(article);
+		if (this.article != null) {
+			return "updateArticle";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("This Article does not exist"));
+			return"updateArticle";
+		}
+	}
+	
+	public String modifAuto() {
+		List<Article> listArt = artService.getAllArticle();
+		mySession.setAttribute("listArt", listArt);
+		this.article = artService.getArticle(article);
+		if (this.article != null) {
+			return "updateArticle";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("This Article does not exist"));
+			return"updateArticle";
+		}
+		
+	}
+	
+	public String modifAuto2() {
+		List<Article> listArt = artService.getAllArticle();
+		mySession.setAttribute("listArt", listArt);
+		this.article = artService.getArticle(article);
+		if (this.article != null) {
+			return "deleteArticle";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("This Article does not exist"));
+			return"deleteArticle";
+		}
+		
 	}
 }
 

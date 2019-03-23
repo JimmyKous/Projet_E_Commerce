@@ -1,6 +1,5 @@
 package fr.adaming.managedBeans;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -31,12 +30,14 @@ public class CategoryManagedBean {
 	private List<Article> articles;
 	private HttpSession mySession;
 	private UploadedFile image;
+	private Boolean indice;
 
 	// Constructors
 	public CategoryManagedBean() {
 		this.category = new Category();
 		this.mySession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		this.image = null;
+		this.indice = false;
 	}
 	
 	@PostConstruct
@@ -57,6 +58,14 @@ public class CategoryManagedBean {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public Boolean getIndice() {
+		return indice;
+	}
+
+	public void setIndice(Boolean indice) {
+		this.indice = indice;
 	}
 
 	public List<Article> getArticles() {
@@ -94,6 +103,71 @@ public class CategoryManagedBean {
 			return "addCategory";
 		}
 
+	}
+	
+	public String updatCategory() {
+		if(this.image!=null){
+			this.category.setPicture(this.image.getContents());
+		}
+		int test = catService.updateCategory(category);
+		if (test !=0) {
+			this.mySession.setAttribute("listCat",catService.getAllCategory());
+			return "viewAllCategory";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Category Update failed"));
+			return "updateCategory";
+		}
+	}
+	
+	public String deleteCategory() {
+		// Appel de la méthode Service
+		int test = catService.deleteCategory(category);
+		if (test !=0) {
+			this.mySession.setAttribute("listCat",catService.getAllCategory());
+			return "viewAllCategory";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Category Suppression failed"));
+			return "deleteArticle";
+		}
+	}
+	
+	public String searchCategory() {
+		this.indice = true;
+		List<Category> listCat = catService.getAllCategory();
+		mySession.setAttribute("listCat", listCat);
+		this.category = catService.getCategory(category);
+		if (this.category != null) {
+			return "updateCategory";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("This Category does not exist"));
+			return"updateCategory";
+		}
+	}
+	
+	public String modifAuto() {
+		List<Category> listCat = catService.getAllCategory();
+		mySession.setAttribute("listCat", listCat);
+		this.category = catService.getCategory(category);
+		if (this.category != null) {
+			return "updateCategory";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("This Category does not exist"));
+			return"updateCategory";
+		}
+		
+	}
+	
+	public String modifAuto2() {
+		List<Category> listCat = catService.getAllCategory();
+		mySession.setAttribute("listCat", listCat);
+		this.category = catService.getCategory(category);
+		if (this.category != null) {
+			return "deleteCategory";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("This Category does not exist"));
+			return"deleteCategory";
+		}
+		
 	}
 
 }

@@ -2,6 +2,7 @@ package fr.adaming.dao;
 
 import java.util.List;
 
+import org.apache.commons.codec.binary.Base64;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -71,7 +72,11 @@ public class ArticleDaoImpl implements IArticleDao {
 		Session s = sf.getCurrentSession();
 		String req = "FROM Article";
 		Query query = s.createQuery(req);
-		return query.list();
+		List<Article> listArt = query.list();
+		for (Article a : listArt) {
+			a.setImg("data:image/png;base64," + Base64.encodeBase64String(a.getPicture()));
+		}
+		return listArt;
 	}
 
 

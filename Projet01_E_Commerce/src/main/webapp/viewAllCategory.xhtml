@@ -34,12 +34,12 @@
 		    </p:column>
 		    
 		    <p:column headerText="Operations">
-		    	<p:commandLink value="Display" action="#{cusMB.searchCustomer}" update="@all">
-		    		<f:setPropertyActionListener value="#{c}" target="#{cusMB.customer}"></f:setPropertyActionListener>
+		    	<p:commandLink value="Display" action="#{catMB.searchCategory}" update="@all">
+		    		<f:setPropertyActionListener value="#{c}" target="#{catMB.category}"></f:setPropertyActionListener>
 		    	</p:commandLink>
 		    	|
-		    	<p:commandLink value="Delete" action="#{cusMB.deleteCustomer}" update="@all">
-		    		<f:setPropertyActionListener value="#{c}" target="#{cusMB.customer}"></f:setPropertyActionListener>
+		    	<p:commandLink value="Delete" action="#{catMB.deleteCategory}" update="@all">
+		    		<f:setPropertyActionListener value="#{c}" target="#{catMB.category}"></f:setPropertyActionListener>
 		    	</p:commandLink>
 		    </p:column>
 		</p:dataTable>
