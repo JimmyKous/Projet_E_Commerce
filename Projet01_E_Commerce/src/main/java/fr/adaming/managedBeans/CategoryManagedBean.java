@@ -165,7 +165,7 @@ public class CategoryManagedBean {
 			return "deleteCategory";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("This Category does not exist"));
-			return"deleteCategory";
+			return"deleteCategory"; 
 		}
 		
 	}
