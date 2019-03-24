@@ -105,7 +105,7 @@ public class CategoryManagedBean {
 
 	}
 	
-	public String updatCategory() {
+	public String updateCategory() {
 		if(this.image!=null){
 			this.category.setPicture(this.image.getContents());
 		}

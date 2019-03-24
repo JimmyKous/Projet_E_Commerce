@@ -170,6 +170,10 @@ public class BasketManagedBean implements Serializable {
 	}
 	
 	// Work Methods
+	public String connecter(){
+		mySession.setAttribute("listArt", artService.getAllArticle());
+		return "homePageCustomer";
+	}
 	public String addProductToBasket() {
 		OrderLine olOut = new OrderLine();
 		olOut.setArticle(article);
@@ -186,15 +190,15 @@ public class BasketManagedBean implements Serializable {
 			this.listOL.add(olOut);
 			this.size = listOL.size();
 			this.total = this.total + olOut.getPriceOL();
-			OrderLine ol = olService.addOrderLine(olOut);
+			olOut = olService.addOrderLine(olOut);
 			mySession.setAttribute("listOL", listOL);
 			mySession.setAttribute("size", size);
 			mySession.setAttribute("total", total);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The product has been added to your basket"));
-			return "homePage";
+			return "homePageCustomer";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("There is not enough available stock, try ordering less articles"));
-			return "homePage";
+			return "homePageCustomer";
 		}
 		
 	}
@@ -216,7 +220,7 @@ public class BasketManagedBean implements Serializable {
 			mySession.setAttribute("total", total);
 			
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The product has been deleted from your basket"));
-			return "homePage";
+			return "homePageCustomer";
 		} 
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Problem encountered deleting product from your basket, try again"));
 		return "basket";
@@ -227,17 +231,17 @@ public class BasketManagedBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The product has been deleted from your basket"));
 			return "basket";
 		}
-		return "homePage";
+		return "homePageCustomer";
 	}
 	
 	@SuppressWarnings("unchecked")
 	public String validateBasket() {
 		this.listOL = (List<OrderLine>) mySession.getAttribute("listOL");
 		this.basket.setOlList(this.listOL);
+		customer.setAdress(adress);
 		Order order = new Order(adress, customer, basket);
 		Order oOut = oService.addOrder(order);
 		oOut.setListOL(listOL);
-		customer.setAdress(adress);
 		// Email
 		messageMail = "Mrs/Mr"+ oOut.getCustomer().getName()+",\n We are pleased to inform you your order has been accepted and will be processed as soon as possible !"
 		+"\n Please find the recapitulative of your order:"

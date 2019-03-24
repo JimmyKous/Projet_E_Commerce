@@ -21,10 +21,10 @@ public class Customer {
 	@Column(name="id_c") // Column name
 	private int id;
 	
-	@Column(name="mail_c")
+	@Column(name="name_c")
 	private String name;
 	
-	@Column(name="pw_c")
+	@Column(name="mail_c")
 	private String mail;
 	
 	@Column(name="adress_c")

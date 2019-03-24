@@ -16,16 +16,14 @@
 		<h:form>
 			<p:megaMenu orientation="#{megaMenuView.orientation}"
 				style="margin-top:20px">
-				<p:menuitem value="Accueil" url="#" icon="fa-navicon" />
+				<p:menuitem value="Accueil" action="#{basMB.connecter}" />
 	
-				<p:menuitem value="Boards" url="boards.xhtml" />
-				<p:menuitem value="Surfwear" url="surfwear.xhtml" />
-				<p:menuitem value="Accessoires" url="accessories.xhtml" />
+				<p:menuitem value="Basket" url="basket.xhtml" />
 	
 	
 	
 				<f:facet name="options">
-					<p:inputText placeholder="Rechercher" />
+					<p:inputText placeholder="Search" />
 	
 				</f:facet>
 				<p:menuitem value="Se connecter" url="login.xhtml" icon="fa-navicon"

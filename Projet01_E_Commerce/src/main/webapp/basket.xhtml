@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<title>Basket</title>
+</h:head>
+<h:body>
+	<div>
+		<ui:insert>
+		<ui:include src="/templates/template_menubar.xhtml"></ui:include>
+		</ui:insert>
+	</div>
+	<div>
+		<h1 style="Color: black; text-align: center;">Your Basket</h1>	
+		<h:form>
+	
+			<p:dataTable var="ol" value="#{sessionScope.listOL}" id="idTable" style="text-align: center">
+			
+				<p:column headerText="Article">
+			        <h:outputText value="#{ol.article.designation}" />
+			    </p:column>
+				<p:column headerText="Picture">
+			        <h:graphicImage value="#{ol.article.img}" width="180px"/>
+			    </p:column>
+			    
+			    <p:column headerText="Price">
+			        <h:outputText value="#{ol.article.price}" />
+			    </p:column>
+			 
+			    <p:column headerText="Quantity">
+			        <h:outputText value="#{ol.qtyOL}" />
+			    </p:column>
+			 
+			    <p:column headerText="Category">
+			        <h:outputText value="#{ol.article.category.categoryName}" />
+			    </p:column>
+			    
+			</p:dataTable>
+			<h3 style="color:red;"><h:messages/></h3>
+		</h:form>
+	</div>
+	<div>
+		<h:form enctype="multipart/form-data">
+			<h:panelGrid columns="2">			
+				Your Name and Surname: <h:inputText value="#{basMB.customer.name}" />	
+				Your Adress's n°: <p:spinner size="3" value="#{basMB.customer.adress.number}" />
+				Your Adress's Street: <h:inputText value="#{basMB.customer.adress.street}" />
+				Your Adress's Zipcode: <p:spinner size="3" value="#{basMB.customer.adress.zipcode}" />
+				Your Adress's City: <h:inputText value="#{basMB.customer.adress.city}" />
+				Your Adress's Country: <h:inputText value="#{basMB.customer.adress.country}" />
+				Your Email: <h:inputText value="#{basMB.customer.mail}" />
+				<h:commandButton value="Validate Order" action="#{basMB.validateBasket}" />
+			</h:panelGrid>
+		</h:form>
+	</div>
+</h:body>
+</html>
