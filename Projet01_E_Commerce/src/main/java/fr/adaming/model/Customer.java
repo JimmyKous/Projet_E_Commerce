@@ -28,7 +28,7 @@ public class Customer {
 	private String mail;
 	
 	@Column(name="adress_c")
-	private String adress;
+	private Adress adress;
 	
 	// Transform UML to Java association
 	@OneToMany(mappedBy="customer", cascade={CascadeType.REMOVE, CascadeType.PERSIST})
@@ -39,14 +39,14 @@ public class Customer {
 		super();
 	}
 
-	public Customer(String name, String mail, String adress) {
+	public Customer(String name, String mail, Adress adress) {
 		super();
 		this.name = name;
 		this.mail = mail;
 		this.adress = adress;
 	}
 
-	public Customer(String name, String mail, String adress, List<Order> orders) {
+	public Customer(String name, String mail, Adress adress, List<Order> orders) {
 		super();
 		this.name = name;
 		this.mail = mail;
@@ -54,7 +54,7 @@ public class Customer {
 		this.orders = orders;
 	}
 
-	public Customer(int id, String name, String mail, String adress, List<Order> orders) {
+	public Customer(int id, String name, String mail, Adress adress, List<Order> orders) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -88,11 +88,11 @@ public class Customer {
 		this.mail = mail;
 	}
 
-	public String getAdress() {
+	public Adress getAdress() {
 		return adress;
 	}
 
-	public void setAdress(String adress) {
+	public void setAdress(Adress adress) {
 		this.adress = adress;
 	}
 

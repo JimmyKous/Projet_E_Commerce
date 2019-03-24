@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="orders")
@@ -23,37 +24,38 @@ public class Order {
 	private int id;
 	
 	@Column(name="adress_o")
-	private String adress;
+	private Adress adress;
 	
 	// Transform UML to Java Association
 	@ManyToOne
 	@JoinColumn(name="c_id", referencedColumnName="id_c")
 	private Customer customer;
 
-	@OneToMany(mappedBy="order", cascade={CascadeType.REMOVE, CascadeType.PERSIST})
-	private List<OrderLine> orderLines;
+	@Transient
+	private Basket basket;
+	@Transient
+	private List<OrderLine> listOL;
 
 	// Constructor
 	public Order() {
 		super();
 	}
 
-	public Order(String adress, Customer customer, List<OrderLine> orderLines) {
-		super();
-		this.adress = adress;
-		this.customer = customer;
-		this.orderLines = orderLines;
-	}
-
-	public Order(int id, String adress, Customer customer, List<OrderLine> orderLines) {
+	public Order(int id, Adress adress, Customer customer, Basket basket) {
 		super();
 		this.id = id;
 		this.adress = adress;
 		this.customer = customer;
-		this.orderLines = orderLines;
+		this.basket = basket;
 	}
 
-	// Getters & Setters
+	public Order(Adress adress, Customer customer, Basket basket) {
+		super();
+		this.adress = adress;
+		this.customer = customer;
+		this.basket = basket;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -62,11 +64,11 @@ public class Order {
 		this.id = id;
 	}
 
-	public String getAdress() {
+	public Adress getAdress() {
 		return adress;
 	}
 
-	public void setAdress(String adress) {
+	public void setAdress(Adress adress) {
 		this.adress = adress;
 	}
 
@@ -78,12 +80,22 @@ public class Order {
 		this.customer = customer;
 	}
 
-	public List<OrderLine> getOrderLines() {
-		return orderLines;
+	public Basket getBasket() {
+		return basket;
 	}
 
-	public void setOrderLines(List<OrderLine> orderLines) {
-		this.orderLines = orderLines;
+	public void setBasket(Basket basket) {
+		this.basket = basket;
 	}
+
+	public List<OrderLine> getListOL() {
+		return listOL;
+	}
+
+	public void setListOL(List<OrderLine> listOL) {
+		this.listOL = listOL;
+	}
+
+
 	
 }

@@ -30,30 +30,24 @@ public class OrderLine {
 	@JoinColumn(name="id_art_ol", referencedColumnName="id_art")
 	private Article article;
 	
-	@ManyToOne
-	@JoinColumn(name="id_o_ol", referencedColumnName="id_o")
-	private Order order;
-
 	// Constructors
 	public OrderLine() {
 		super();
 	}
 
-	public OrderLine(int qtyOL, double priceOL, Article article, Order order) {
+	public OrderLine(int qtyOL, double priceOL, Article article) {
 		super();
 		this.qtyOL = qtyOL;
 		this.priceOL = priceOL;
 		this.article = article;
-		this.order = order;
 	}
 
-	public OrderLine(int idOL, int qtyOL, double priceOL, Article article, Order order) {
+	public OrderLine(int idOL, int qtyOL, double priceOL, Article article) {
 		super();
 		this.idOL = idOL;
 		this.qtyOL = qtyOL;
 		this.priceOL = priceOL;
 		this.article = article;
-		this.order = order;
 	}
 
 	// Getters & Setters
@@ -87,14 +81,6 @@ public class OrderLine {
 
 	public void setArticle(Article article) {
 		this.article = article;
-	}
-
-	public Order getOrder() {
-		return order;
-	}
-
-	public void setOrders(Order order) {
-		this.order = order;
 	}
 	
 }

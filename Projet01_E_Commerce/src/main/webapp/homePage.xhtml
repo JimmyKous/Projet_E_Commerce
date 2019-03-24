@@ -10,10 +10,54 @@
 </h:head>
 <h:body >
 <div>
-<ui:insert>
-<ui:include src="/templates/template_menubar.xhtml"></ui:include>
-</ui:insert>
+	<ui:insert>
+	<ui:include src="/templates/template_menubar.xhtml"></ui:include>
+	</ui:insert>
 </div>
+
+<h1 style="Color: black; text-align: center;">Article's List</h1>	
+	<h:form>
+
+		<p:dataTable var="a" value="#{sessionScope.listArt}" id="idTable" style="text-align: center">
+		
+			<p:column headerText="Picture">
+		        <h:graphicImage value="#{a.img}" width="180px"/>
+		    </p:column>
+		    
+		    <p:column headerText="Id">
+		        <h:outputText value="#{a.idArt}" />
+		    </p:column>
+		 
+		    <p:column headerText="Name">
+		        <h:outputText value="#{a.designation}" />
+		    </p:column>
+		 
+		    <p:column headerText="Description">
+		        <h:outputText value="#{a.description}" />
+		    </p:column>
+		    
+		    <p:column headerText="Price">
+		        <h:outputText value="#{a.price}" />
+		    </p:column>
+		    
+		    <p:column headerText="Available Stock">
+		        <h:outputText value="#{a.stock}" />
+		    </p:column>
+		    
+		    <p:column headerText="Category">
+		        <h:outputText value="#{a.category.categoryName}" />
+		    </p:column>
+		    
+		    <p:column headerText="Operations">
+		    	<p:spinner value="#{basMB.quantity}" />
+		    	|
+		    	<p:commandLink value="Add to Basket" action="#{basMB.addProductToBasket}" update="@all">
+		    		<f:setPropertyActionListener value="#{a}" target="#{basMB.article}"></f:setPropertyActionListener>
+		    	</p:commandLink>
+		    </p:column>
+		</p:dataTable>
+		<h3 style="color:red;"><h:messages/></h3>
+	</h:form>
 
 </h:body>
 </html>

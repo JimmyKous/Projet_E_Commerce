@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </h:head>
 <h:body>
-<ui:insert>
+	<ui:insert>
 		<ui:include src="/templates/template_menubaradmin.xhtml"></ui:include>
 	</ui:insert>
 	
@@ -18,7 +18,7 @@
 		<p:dataTable var="a" value="#{sessionScope.listArt}" id="idTable" style="text-align: center">
 		
 			<p:column headerText="Picture">
-		        <h:graphicImage value="#{a.img}" width="200px"/>
+		        <h:graphicImage value="#{a.img}" width="180px"/>
 		    </p:column>
 		    
 		    <p:column headerText="Id">

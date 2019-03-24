@@ -32,7 +32,7 @@ public class Article {
 	private double price;
 	
 	@Column(name="stock_art")
-	private String stock;
+	private int stock;
 	
 	
 	@Column(name="picture_art")
@@ -54,7 +54,7 @@ public class Article {
 		super();
 	}
 
-	public Article(String designation, String description, double price, String stock, byte[] picture,
+	public Article(String designation, String description, double price, int stock, byte[] picture,
 			Category category) {
 		super();
 		this.designation = designation;
@@ -65,7 +65,7 @@ public class Article {
 		this.category = category;
 	}
 
-	public Article(int idArt, String designation, String description, double price, String stock, byte[] picture,
+	public Article(int idArt, String designation, String description, double price, int stock, byte[] picture,
 			Category category) {
 		super();
 		this.idArt = idArt;
@@ -109,11 +109,11 @@ public class Article {
 		this.price = price;
 	}
 
-	public String getStock() {
+	public int getStock() {
 		return stock;
 	}
 
-	public void setStock(String stock) {
+	public void setStock(int stock) {
 		this.stock = stock;
 	}
 

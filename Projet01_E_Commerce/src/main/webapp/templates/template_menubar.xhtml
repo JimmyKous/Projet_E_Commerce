@@ -13,23 +13,25 @@
 <h:body>
 	<ui:composition>
 		<h:outputStylesheet library="css" name="homePage_template.css" />
-		<p:megaMenu orientation="#{megaMenuView.orientation}"
-			style="margin-top:20px">
-			<p:menuitem value="Accueil" url="#" icon="fa-navicon" />
-
-			<p:menuitem value="Boards" url="boards.xhtml" />
-			<p:menuitem value="Surfwear" url="surfwear.xhtml" />
-			<p:menuitem value="Accessoires" url="accessories.xhtml" />
-
-
-
-			<f:facet name="options">
-				<p:inputText placeholder="Rechercher" />
-
-			</f:facet>
-			<p:menuitem value="Se connecter" url="login.xhtml" icon="fa-navicon"
-				style="margin-right" />
-		</p:megaMenu>
+		<h:form>
+			<p:megaMenu orientation="#{megaMenuView.orientation}"
+				style="margin-top:20px">
+				<p:menuitem value="Accueil" url="#" icon="fa-navicon" />
+	
+				<p:menuitem value="Boards" url="boards.xhtml" />
+				<p:menuitem value="Surfwear" url="surfwear.xhtml" />
+				<p:menuitem value="Accessoires" url="accessories.xhtml" />
+	
+	
+	
+				<f:facet name="options">
+					<p:inputText placeholder="Rechercher" />
+	
+				</f:facet>
+				<p:menuitem value="Se connecter" url="login.xhtml" icon="fa-navicon"
+					style="margin-right" />
+			</p:megaMenu>
+		</h:form>
 	</ui:composition>
 </h:body>
 </html>
