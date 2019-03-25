@@ -129,6 +129,24 @@ public class ArticleManagedBean {
 		}
 	}
 	
+
+	public String updateCustArticle() {
+		if(this.image!=null){
+			this.article.setPicture(this.image.getContents());
+		}
+		Category c = new Category();
+		c.setIdCat(categoryName);
+		this.article.setCategory(catService.getCategory(c));
+		int test = artService.updateArticle(article);
+		if (test !=0) {
+			this.mySession.setAttribute("listArt",artService.getAllArticle());
+			return "viewAllCategoryByCategory";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Article Update failed"));
+			return "viewAllCategoryByCategory";
+		}
+	}
+	
 	public String deleteArticle() {
 		// Appel de la méthode Service
 		int test = artService.deleteArticle(article);
